@@ -15,13 +15,15 @@ class edited_image:
     
     def remove_background(self):
         removed_img = remove(self.image)
-        rotated_img = removed_img.transpose(2)
-        rotated_img.save(self.folder_handler.get_edited_pictures_folder() + self.folder_handler.get_output_name_new_image())
+        removed_img.save(self.folder_handler.get_edited_pictures_folder() + self.folder_handler.get_output_name_new_image())
         
-
-    
+    def get_all_pictures_from_folder(path=os.getcwd()):
+        new_fh = fh.FolderHandling(path)
+        unedited_path = new_fh.get_unedited_pictures_folder()
+        for file in os.listdir(unedited_path):
+            im = edited_image(Image.open(unedited_path + f"\\{file}"))
+            im.remove_background()
 
 
 if __name__ == "__main__":
-    new_image = edited_image(Image.open("normal_bg.jpg"))
-    new_image.remove_background()
+    edited_image.get_all_pictures_from_folder()
