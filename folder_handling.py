@@ -8,6 +8,10 @@ class FolderHandling:
     def __init__(self, path=os.getcwd()):
         self.path = path
 
+    def make_backslash_double(path):
+        path = path.replace("\\", "\\\\")
+        return path
+
     def get_unedited_pictures_folder(self):
         folder_name_path = self.path + FolderHandling.unedited_folder_name
         if os.path.exists(folder_name_path) == False:
