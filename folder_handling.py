@@ -3,6 +3,7 @@ import os
 class FolderHandling:
     unedited_folder_name = "\\unedited_images"
     edited_folder_name = "\\edited_images"
+    background_folder_name = "\\background"
 
     def __init__(self, path=os.getcwd()):
         self.path = path
@@ -21,9 +22,18 @@ class FolderHandling:
 
         return folder_name_path
 
+
+    def get_background_folder(self):
+        background_folder = self.path + self.background_folder_name
+        if os.path.exists(background_folder) == False: # if it doesn't exists, it'll have to be refilled with images
+            os.makedirs(background_folder)
+
+        return background_folder
+
     def get_output_name_new_image(self):
         image_list = os.listdir(self.get_edited_pictures_folder())
         return "\\edited_" + str(len(image_list)) + ".png"
+
 
 
 
