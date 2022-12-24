@@ -80,26 +80,13 @@ class edited_image:
 
         return merged_image
 
-    def create_headshot(image_path = " ", image = None): #if no image path/image is given, it'll edit all images in the /unedited_images dir
-        if image_path == " " and image == None:
-            print("Image path not given.\nEditing all images in /unedited_images")
-            edited_image.edit_all_pictures_from_folder()
+    def create_headshot(self, all_folder = False): #if no image path/image is given, it'll edit all images in the /unedited_images dir
+        if all_folder:
+            self.edit_all_pictures_from_folder()
         else:
-            if image != None:
-                im = edited_image(image)
-                im._merge_headshot_and_background()
+            try:
+                return self._merge_headshot_and_background()
+                
+            except:
+                print("Error trying to load the image.")
 
-                return im
-            else:
-                try:
-                    im = edited_image(Image.open(image_path))
-                    im._merge_headshot_and_background()
-
-                    return im
-                except:
-                    print("Error trying to load the image.")
-
-
-
-if __name__ == "__main__":
-    edited_image.create_headshot("D:\\Programming\\Python\\Image Processing\\unedited_images\\shoot-me-now-acting-agency-headshot.jpg")
