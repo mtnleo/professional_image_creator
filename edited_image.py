@@ -28,9 +28,18 @@ class edited_image:
     def edit_all_pictures_from_folder(path=os.getcwd()):
         new_fh = fh.FolderHandling(path)
         unedited_path = new_fh.get_unedited_pictures_folder()
+
         for file in os.listdir(unedited_path):
             im = edited_image(Image.open(unedited_path + f"\\{file}"))
             im._merge_headshot_and_background()
+
+    def remove_background_for_all_folder(path=os.getcwd()):
+        new_fh = fh.FolderHandling(path)
+        unedited_path = new_fh.get_unedited_pictures_folder()
+
+        for file in os.listdir(unedited_path):
+            im = edited_image(Image.open(unedited_path + f"\\{file}"))
+            im.remove_background_and_save()
 
     def _get_background_image_path(self): # picks a random background every time
         background_folder_path = self.folder_handler.get_background_folder()
