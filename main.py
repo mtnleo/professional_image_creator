@@ -14,38 +14,41 @@ def print_menu():
 
 if __name__ == "__main__":
     cont = True
+    success = True
     while cont == True:
         os.system("cls")
         print_menu()
         option = int(input("\nChoose an option: "))
 
         if option == 1:
-            image_path = (input("Paste here your image's path: "))
+            image_path = (input("Paste here your image's path (Shift + Ins.): "))
             image_path = fh.FolderHandling.make_backslash_double(image_path)
             
             print("--> Removing background now...")
             im = em.edited_image(em.Image.open(image_path))
             im.remove_background_and_save()
-            print(f"--> Background removed!\nCheck '{im.folder_handler.get_edited_pictures_folder}'")
+            print(f"--> Background removed!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
 
         elif option == 2:
             print("--> Removing background for all images in the folder, this might take a while...")
-            em.edited_image.remove_background_for_all_folder()
-            print("--> Backgrounds removed!\nCheck your 'edited_images' folder")
+            success = em.edited_image.remove_background_for_all_folder()
+            if success:
+                print("--> Backgrounds removed!\nCheck your 'edited_images' folder")
 
         elif option == 3:
-            image_path = (input("Paste here your image's path: "))
+            image_path = (input("Paste here your image's path (Shift + Ins.): "))
             image_path = fh.FolderHandling.make_backslash_double(image_path)
             im = em.edited_image(em.Image.open(image_path))
 
             print(f"--> Editing image now...")
             im.create_headshot()
-            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_edited_pictures_folder}'")
+            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
 
         elif option == 4:
             print("--> Editing images from the folder, this might take a while...")
-            em.edited_image.edit_all_pictures_from_folder()
-            print("--> Images edited!\nCheck your 'edited_images' folder")
+            success = em.edited_image.edit_all_pictures_from_folder()
+            if success:
+                print("--> Images edited!\nCheck your 'edited_images' folder")
 
         elif option == 5:
             print("Welcome to the Image Processing CLI!")
