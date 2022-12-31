@@ -28,13 +28,13 @@ if __name__ == "__main__":
             print("--> Removing background now...")
             im = em.edited_image(em.Image.open(image_path))
             im.remove_background_and_save()
-            print(f"--> Background removed!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
+            print(f"--> Background removed!\nCheck '{im.folder_handler.get_removed_bg_folder()}'")
 
         elif option == 2:
             print("--> Removing background for all images in the folder, this might take a while...")
             success = em.edited_image.remove_background_for_all_folder()
             if success:
-                print("--> Backgrounds removed!\nCheck your 'edited_images' folder")
+                print("--> Backgrounds removed!\nCheck 'edited_images/removed_background'")
 
         elif option == 3:
             image_path = (input("Paste here your image's path (Shift + Ins.): "))
@@ -43,18 +43,18 @@ if __name__ == "__main__":
 
             print(f"--> Editing image now...")
             im.create_headshot()
-            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
+            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_edited_headshots_folder()}'")
 
         elif option == 4:
             print("--> Editing images from the folder, this might take a while...")
-            success = em.edited_image.edit_all_pictures_from_folder()
+            success = em.edited_image.headshot_all_pictures_from_folder()
             if success:
-                print("--> Images edited!\nCheck your 'edited_images' folder")
+                print(f"--> Headshots created!\nCheck 'edited_images/headshots''")
 
         elif option == 5:
             image_path = (input("Paste here your image's path (Shift + Ins.): "))
             image_path = fh.FolderHandling.make_backslash_double(image_path)
-            im = em.edited_image(em.Image.open(image_path))
+            im = em.edited_image(em.Image.open(image_path)) 
 
             new_width = int(input("New Width -> "))
             new_height = int(input("New Height -> "))
@@ -62,7 +62,7 @@ if __name__ == "__main__":
             print(f"--> Resizing image now...")
             try:
                 im.resize_image_user(new_width, new_height)
-                print(f"--> Image resized!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
+                print(f"--> Image resized!\nCheck '{im.folder_handler.get_resized_pictures_folder()}'")
             except:
                 print("Error trying to resize the image, try again")
 
