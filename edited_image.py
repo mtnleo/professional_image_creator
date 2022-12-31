@@ -111,3 +111,11 @@ class edited_image:
             except:
                 print("Error trying to load the image.")
 
+    def resize_image_user(self, new_width, new_height):
+        size = [new_width, new_height]
+        
+        resized_image = self.image.resize(size=tuple(size))
+        resized_image.save(self.folder_handler.get_edited_pictures_folder() + self.folder_handler.get_output_name_new_image())
+
+        return resized_image
+

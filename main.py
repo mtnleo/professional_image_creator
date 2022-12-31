@@ -9,8 +9,9 @@ def print_menu():
     print("| 2 |   Remove background for each image in the 'unedited_images' folder")
     print("| 3 |   Create a professional headshot from an image")
     print("| 4 |   Create a professional headshot for each image in the 'unedited_images' folder")
-    print("| 5 |   Help & How to use")
-    print("| 6 |   Exit")
+    print("| 5 |   Resize an image")
+    print("| 6 |   Help & How to use")
+    print("| 7 |   Exit")
 
 if __name__ == "__main__":
     cont = True
@@ -51,6 +52,21 @@ if __name__ == "__main__":
                 print("--> Images edited!\nCheck your 'edited_images' folder")
 
         elif option == 5:
+            image_path = (input("Paste here your image's path (Shift + Ins.): "))
+            image_path = fh.FolderHandling.make_backslash_double(image_path)
+            im = em.edited_image(em.Image.open(image_path))
+
+            new_width = int(input("New Width -> "))
+            new_height = int(input("New Height -> "))
+
+            print(f"--> Resizing image now...")
+            try:
+                im.resize_image_user(new_width, new_height)
+                print(f"--> Image resized!\nCheck '{im.folder_handler.get_edited_pictures_folder()}'")
+            except:
+                print("Error trying to resize the image, try again")
+
+        elif option == 6:
             print("Welcome to the Image Processing CLI!")
             print("For converting or editing images, you may indicate the path in your computer")
             print("You can do that by right-clicking the image, and clicking 'Copy Path'")
@@ -58,7 +74,7 @@ if __name__ == "__main__":
             print("'unedited_images' folder, and then selecting the options that")
             print("edit a whole folder at once. Creating copies of the unedited photos")
 
-        elif option == 6:
+        elif option == 7:
             print("Goodbye!")
             cont = False
 
