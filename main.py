@@ -1,7 +1,6 @@
 import edited_image as em
 import os
 import folder_handling as fh
-import time
 
 def print_menu():
     print("----------------------- IMAGE PROCESSING -----------------------\n")
@@ -28,7 +27,7 @@ if __name__ == "__main__":
             print("--> Removing background now...")
             im = em.edited_image(em.Image.open(image_path))
             im.remove_background_and_save()
-            print(f"--> Background removed!\nCheck '{im.folder_handler.get_removed_bg_folder()}'")
+            print(f"--> Background removed!\nCheck '{im.folder_handler.get_pictures_folder(im.folder_handler.background_folder_name)}'")
 
         elif option == 2:
             print("--> Removing background for all images in the folder, this might take a while...")
@@ -43,7 +42,7 @@ if __name__ == "__main__":
 
             print(f"--> Editing image now...")
             im.create_headshot()
-            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_edited_headshots_folder()}'")
+            print(f"--> Headshot created!\nCheck '{im.folder_handler.get_pictures_folder(im.folder_handler.headshot_folder_name)}'")
 
         elif option == 4:
             print("--> Editing images from the folder, this might take a while...")
@@ -62,7 +61,7 @@ if __name__ == "__main__":
             print(f"--> Resizing image now...")
             try:
                 im.resize_image_user(new_width, new_height)
-                print(f"--> Image resized!\nCheck '{im.folder_handler.get_resized_pictures_folder()}'")
+                print(f"--> Image resized!\nCheck '{im.folder_handler.get_pictures_folder(im.folder_handler.resized_folder_name)}'")
             except:
                 print("Error trying to resize the image, try again")
 

@@ -20,7 +20,7 @@ class edited_image:
     
     def remove_background_and_save(self):
         removed_img = remove(self.image)
-        removed_bg_path = self.folder_handler.get_removed_bg_folder()
+        removed_bg_path = self.folder_handler.get_pictures_folder(self.folder_handler.background_folder_name)
         removed_img.save(removed_bg_path + self.folder_handler.get_output_name_new_image(removed_bg_path))
 
         return removed_img
@@ -32,7 +32,7 @@ class edited_image:
 
     def remove_background_for_all_folder(path=os.getcwd()):
         new_fh = fh.FolderHandling(path)
-        unedited_path = new_fh.get_unedited_pictures_folder()
+        unedited_path = new_fh.get_pictures_folder(new_fh.unedited_folder_name)
 
         dir_list = os.listdir(unedited_path)
 
@@ -51,7 +51,7 @@ class edited_image:
 
     def headshot_all_pictures_from_folder(path=os.getcwd()):
         new_fh = fh.FolderHandling(path)
-        unedited_path = new_fh.get_unedited_pictures_folder()
+        unedited_path = new_fh.get_pictures_folder(new_fh.unedited_folder_name)
 
         dir_list = os.listdir(unedited_path)
 
@@ -66,7 +66,7 @@ class edited_image:
 
 
     def _get_background_image_path(self): # picks a random background every time
-        background_folder_path = self.folder_handler.get_background_folder()
+        background_folder_path = self.folder_handler.get_pictures_folder(self.folder_handler.background_folder_name)
         random_image_path = ""
         try:
             random_image_path = background_folder_path + "\\" + random.choice(os.listdir(background_folder_path))
@@ -108,7 +108,7 @@ class edited_image:
 
         # merging background + headshot image
         merged_image = Image.alpha_composite(resized_background, resized_headshot)
-        headshot_folder = self.folder_handler.get_edited_headshots_folder()
+        headshot_folder = self.folder_handler.get_pictures_folder(self.folder_handler.headshot_folder_name)
         merged_image.save(headshot_folder + self.folder_handler.get_output_name_new_image(headshot_folder))
 
         return merged_image
@@ -131,7 +131,7 @@ class edited_image:
         size = [new_width, new_height]
         
         resized_image = self.image.resize(size=tuple(size))
-        resized_folder = self.folder_handler.get_resized_pictures_folder()
+        resized_folder = self.folder_handler.get_pictures_folder(self.folder_handler.resized_folder_name)
         resized_image.save(resized_folder + self.folder_handler.get_output_name_new_image(resized_folder))
 
         return resized_image
