@@ -20,7 +20,7 @@ class edited_image:
     
     def remove_background_and_save(self):
         removed_img = remove(self.image)
-        removed_bg_path = self.folder_handler.get_pictures_folder(self.folder_handler.background_folder_name)
+        removed_bg_path = self.folder_handler.get_pictures_folder(self.folder_handler.removed_bg_folder_name)
         removed_img.save(removed_bg_path + self.folder_handler.get_output_name_new_image(removed_bg_path))
 
         return removed_img
